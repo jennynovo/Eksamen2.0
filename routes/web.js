@@ -1,73 +1,56 @@
-var express = require('express')
+var express = require('express');
 var router = express.Router();
 
-var index_controller = require("../controller/indexController");
-const { Router }  = require ("express");
-
-
-router.get('/',index_controller.frontpage_get);
+// Require controller modules.
+var user_controller = require('/Users/Jennynovo/Desktop/Eksamen1.0/controller/userController.js');
+var index_controller = require('/Users/Jennynovo/Desktop/Eksamen1.0/controller/indexController.js');
+var matches_controller = require('/Users/Jennynovo/Desktop/Eksamen1.0/controller/matchesController.js');
 
 /** 
+ * Visitor Frontend
+ */
 
-//Register Route
-app.get('/', function (request, response) {
-    response.sendFile(path.join(__dirname + '/views/register.html'));
-});
+router.get('/', index_controller.frontpage_get);
 
-//Login Route
-app.get('/login', function (request, response) {
-    response.sendFile(path.join(__dirname + '/views/login.html'));
-});
+router.post('/login', index_controller.login_post);
 
-//Create user post
-app.post('/register-user', function (request, response) {
+router.get('/logout', index_controller.logout);
 
-    var username = request.body.username;
-    var password = request.body.password;
-    var email = request.body.email;
-    var birthdate = request.body.birthdate;
-    var gender = null;
-    var interest = null;
+/**
+ * Registered Frontend
+ */
 
-    switch (request.body.gender) {
-        case 'male':
-            gender = 'male';
-            break;
-        case 'female':
-            gender = 'female';
-            break;
-        default:
-            gender = 'other';
-    }
+//User register form
+router.get('/register', user_controller.user_create_get);
 
-    switch (request.body.interest) {
-        case 'male':
-            interest = 'male';
-            break;
-        case 'female':
-            interest = 'female';
-            break;
-        default:
-            interest = 'other';
-    }
+router.post('/register', user_controller.user_create_post);
 
-    if (email && password) {
-        var sql = "INSERT INTO eksamen.users (username, password, email, birthday, gender, interest, _ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        const newId = uuidv4();
-        const newToken = generateAccessToken(newId);
 
-        connection.query(sql, [username, password, email, birthdate, gender, interest, newId], function (err, result) {
-            if (err) throw err;
-            console.log("success")
-        });
-        return response.json({
-            token: newToken,
-            user_id: newId
-        });
-    }
+// User CRUD
+router.get('/user', user_controller.user_detail);
 
-});
+router.get('/user/update', user_controller.user_create_get);
 
-**/
-//exporterer vores routes
+router.post('/user/update', user_controller.user_create_post);
+
+router.get('/user/:id/delete', user_controller.user_delete_get);
+
+router.post('/user/:id/delete', user_controller.user_delete_post);
+
+router.get('/user/:id/update', user_controller.user_update_get);
+
+router.post('/user/:id/update', user_controller.user_update_post);
+
+router.get('/user/:id', user_controller.user_detail);
+
+router.get('/users', user_controller.user_list_possible_matches);
+
+
+// Matches CRUD
+router.get('/matches/get-more', matches_controller.show_possible_match);
+
+router.post('/matches/:id/:name', matches_controller.make_skip_match);
+
+router.get('/matches', matches_controller.see_all_matches);
+
 module.exports = router;

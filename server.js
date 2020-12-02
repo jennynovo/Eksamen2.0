@@ -1,29 +1,26 @@
-var mysql = require('mysql');
-var bodyParser = require("body-parser");
-var express = require("express");
-var session = require("express-session");
-var path = require("path");
-var AllRoute = require('./routes/web');
+var express = require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var path = require('path');
+var cors = require('cors');
+
+var allRoutes = require('/Users/Jennynovo/Desktop/Eksamen1.0/routes/web.js');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+app.use(cors());
+app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
 
+app.use('/', allRoutes);
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'Users',
-    password: 'Eksamen',
-    database: 'eksamen',
-    insecureAuth: true
-});
+app.listen(3006);
 
-connection.connect(function (err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
-    console.log('Connected to the MySQL server.');
-});
-
-app.listen(3000);
-console.log("Server started...");
+module.exports = app;
