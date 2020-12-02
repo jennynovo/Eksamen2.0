@@ -1,8 +1,8 @@
-var express = require('exress')
+var express = require('express')
 var router = express.Router();
 
 var index_controller = require("../controller/indexController");
-const {router}=require ("express");
+const { Router }  = require ("express");
 
 
 router.get('/',index_controller.frontpage_get);
