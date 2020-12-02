@@ -1,52 +1,13 @@
-var mysql = require('mysql');
-var bodyParser = require("body-parser");
-var express = require("express");
-var session = require("express-session");
-var path = require("path");
-const { v4: uuidv4 } = require('uuid');
-const jwt = require("jsonwebtoken");
-require('dotenv').config()
+var express = require('exress')
+var router = express.Router();
 
-var app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+var index_controller = require("../controller/indexController");
+const {router}=require ("express");
 
-function generateAccessToken(user_id) {
-    return jwt.sign(user_id, process.env.TOKEN_SECRET);
-}
 
-function authenticateToken(req, res, next) {
-    // Gather the jwt access token from the request header
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if (token == null) return res.sendStatus(401) // if there isn't any token
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user_id) => {
-        console.log(err)
-        if (err) return res.sendStatus(403)
-        req.user_id = user_id
-        next() // pass the execution off to whatever request the client intended
-    })
-}
-
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'rootroot',
-    database: 'eksamen1.0',
-    insecureAuth: true
-});
-
-connection.connect(function (err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
-    console.log('Connected to the MySQL server.');
-});
+router.get('/',index_controller.frontpage_get);
 
 /** 
- * ROUTES  
-**/
 
 //Register Route
 app.get('/', function (request, response) {
@@ -107,5 +68,6 @@ app.post('/register-user', function (request, response) {
 
 });
 
-app.listen(3000);
-console.log("Server started...");
+**/
+//exporterer vores routes
+module.exports = router;
