@@ -1,7 +1,7 @@
 //
 var path = require('path');
 
-var config = require('/Users/Jennynovo/Desktop/Eksamen1.0/databaseconfig.js');
+var config = require('../databaseconfig.js');
 var con = config.connection;
 
 // Display detail page for a specific user.
@@ -9,7 +9,7 @@ exports.frontpage_get = function(req, res) {
 	if(req.session.loggedin == true && req.session.email) {
 		res.redirect('/user');
 	}
-    res.sendFile(path.join(__dirname + '/Users/Jennynovo/Desktop/Eksamen1.0/view/login.html'));
+    res.sendFile(path.join(__dirname + '/../view/login.html'));
 };
 
 exports.login_post = function(req, res) {

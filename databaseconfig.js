@@ -3,7 +3,7 @@ var config = {
 	host     : 'localhost',
 	user     : 'root',
 	password : 'rootroot',
-	database : 'eksamen'
+	database : 'eks'
 };
 
 var connection = mysql.createConnection(config);
@@ -16,7 +16,7 @@ connection.connect(function(err) {
 
   console.log('connected as id ' + connection.threadId);
 });
-
+  
 module.exports = {
-     connection : mysql.createConnection(config)
+     connection : mysql.createConnection(config) 
 }

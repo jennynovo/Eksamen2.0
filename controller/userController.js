@@ -1,7 +1,7 @@
 //var User = require('../models/user');
 var path = require('path');
 
-var config = require('/Users/Jennynovo/Desktop/Eksamen1.0/databaseconfig.js');
+var config = require('../databaseconfig.js');
 var con = config.connection;
 
 // Display list of all users.
@@ -18,7 +18,10 @@ exports.user_detail = function(req, res) {
 
 				var user = results[0];
 
-				res.render(path.join(__dirname + '/Users/Jennynovo/Desktop/Eksamen1.0/view/profile.ejs'), {
+				req.session.interest = user.interest;
+				req.session.gender = user.gender;
+
+				res.render(path.join(__dirname + '/../view/profile.ejs'), {
 			        user: user
 			    });
 
@@ -32,7 +35,7 @@ exports.user_detail = function(req, res) {
 
 // Display user create form on GET.
 exports.user_create_get = function(req, res) {
-    res.sendFile(path.join(__dirname + '/Users/Jennynovo/Desktop/Eksamen1.0/view/register.html'));
+    res.sendFile(path.join(__dirname + '/../view/register.html'));
 };
 
 // Handle user create on POST.

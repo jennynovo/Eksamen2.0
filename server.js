@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
 
-var allRoutes = require('/Users/Jennynovo/Desktop/Eksamen1.0/routes/web.js');
+var allRoutes = require('./routes/web');
 
 var app = express();
 app.use(session({
