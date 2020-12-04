@@ -7,9 +7,9 @@ var cors = require('cors'); // cors i express bruges som middleware
 
 var allRoutes = require('./routes/web'); //indkluderer og henter vores routes
 
-var app = express();
+var app = express(); 
 app.use(session({
-	secret: 'secret', //cookies
+	secret: 'secret', //cookies 
 	resave: true, //aktiv 
 	saveUninitialized: true //session cookie bliver sat til browseren
 }));
@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 
 app.use('/', allRoutes);
 
-app.listen(3006); //aktiverer porten
+app.listen(3000); //aktiverer porten
 
 //exporterer app
 module.exports = app;

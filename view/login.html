@@ -1,23 +1,19 @@
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
 <link rel="stylesheet" type="text/css"   href="/css/style.css">
-<!------ Include the above in your HEAD tag ---------->
-
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-    </div>
-
+</head>
     <!-- Login Form -->
+    <h1>Login</h1>
+    <style>
+      body {background-color: rgb(74, 162, 173);}
+      h1   {color: rgba(33, 45, 109, 0.966);}
+      h1 {text-align: center;}
+    </style>
     <form action="/login" method="POST">
-      <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
-      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+      <input type="text" id="email"  name="email" placeholder="Email">
+      <input type="text" id="password" name="password" placeholder="password">
+      <input type="submit" value="Log In">
     </form>
 
     <!-- Remind Passowrd -->
@@ -27,3 +23,4 @@
 
   </div>
 </div>
+</html>

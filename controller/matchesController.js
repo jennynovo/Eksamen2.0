@@ -40,8 +40,6 @@ exports.show_possible_match = function(req, res) {
 		    
 		 });  
 
-
-		
 	}
 };
 

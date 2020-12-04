@@ -1,12 +1,25 @@
 <h2>Welcome to your profile</h2>
+<style>
+    body {background-color: rgb(74, 162, 173);}
+    h2   {color: rgba(33, 45, 109, 0.966);}
+    h2 {text-align: center;}
+  </style>
 <h3>User information</h3>
+<style>
+    h3   {color: rgba(33, 45, 109, 0.966);}
+    h3   {text-align: center;}
+  </style>
 <p><%= user.email %></p>
+<style>
+
+</style>
 <p><%= user.name %></p>
 <br>
 You are interested in: <p><%= user.interest %> - <a href="/matches/get-more">get more matches here</a></p>
 <div>
 See all matches <a href="/matches"> here. </a>
 </div>
+
 <br>
 <div>
 <a href="/logout">Log out</a>
