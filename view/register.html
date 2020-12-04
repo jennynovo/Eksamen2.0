@@ -1,24 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css"   href="/css/style.css">
-<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" type="text/css"   href="/stylesheet.css">
+</head>
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs Titles -->
 
-    <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+      <h2 style="color:rgb(80, 42, 42)">Registration for TinderX</h2>
+      <p style="color:rgb(161, 114, 114);">Fill in the information below.</p>
     </div>
 
-    <!-- Login Form -->
+    <!-- registration form -->
     <form action="/register" method="POST">
+      <label for="cars">Type your name:</label>
+      <br>
       <input type="text" id="name" class="fadeIn second" name="name" placeholder="Name">
-      
+
       <div>
-      <label for="cars">What gender are YOU:</label>
+      <label for="cars">Choose your gender:</label>
     </div>
     <div>
 
@@ -32,7 +36,7 @@
 
     <div>
 
-      <label for="cars">What gender interest you:</label>
+      <label for="cars">Choose what gender interest you:</label>
     </div>
 
     <div>
@@ -45,9 +49,14 @@
       </select>
 
     </div>
-
+    <label for="cars">Type your email:</label>
+    <br>
       <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
+      <br>
+      <label for="cars">Choose a password:</label>
+      <br>
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+      <br><br>
       <input type="submit" class="fadeIn fourth" value="Create">
     </form>
 

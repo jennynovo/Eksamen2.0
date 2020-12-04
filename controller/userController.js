@@ -66,12 +66,11 @@ exports.user_create_post = function(req, res) {
 // Display user delete form on GET.
 exports.user_delete_get = function(req, res) {
 
-
 	if(request.session.loggedin == true) {
 	}
 	else {
 	}
-
+	
     res.send('NOT IMPLEMENTED: user delete GET');
 };
 

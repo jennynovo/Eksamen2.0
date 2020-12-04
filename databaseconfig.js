@@ -1,3 +1,4 @@
+//mine data til mySQL 
 var mysql = require('mysql');
 var config = {
 	host     : 'localhost',
