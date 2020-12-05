@@ -1,10 +1,9 @@
 //var User = require('../models/user');
 var path = require('path');
-
 var config = require('../databaseconfig.js');
 var con = config.connection;
 
-// Display list of all users.
+// vis alle brugere
 exports.show_possible_match = function(req, res) {
    if(req.session.loggedin == true && req.session.email) {
 
@@ -37,12 +36,13 @@ exports.show_possible_match = function(req, res) {
 				}			
 				res.end();
 			});
-		    
-		 });  
-
+		 });
 	}
 };
 
+
+
+//dislike
 exports.make_skip_match = function(req, res) {
    if(req.session.loggedin == true && req.session.email) {
 
@@ -64,13 +64,13 @@ exports.make_skip_match = function(req, res) {
    		fetchID(function(user){  
 		    current_user = user; 
 
-		    //update last_match_check_id
+		    //opdater last_match_check_id
    			con.query('UPDATE users SET last_match_check_id = ? WHERE email = ?', [match_id, req.session.email], function(error, results, fields) {});
 
 	   		switch(what_to_do) {
 	   			case 'match':
 
-					//Check if Match
+					//kontroller om der er match
 					   		function checkMatch(callback) { 
 					   			con.query('SELECT * FROM matches WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], function(error, results, fields) {
 									if (results.length > 0) {

@@ -4,12 +4,12 @@ var path = require('path');
 var config = require('../databaseconfig.js');
 var con = config.connection;
 
-// Display list of all users.
+// vis alle brugere
 exports.user_list_possible_matches = function(req, res) {
     res.send('NOT IMPLEMENTED: user possible matches list');
 };
 
-// Display detail page for a specific user.
+// vis side for bruger
 exports.user_detail = function(req, res) {
 
 	if(req.session.loggedin == true && req.session.email) {
@@ -33,12 +33,12 @@ exports.user_detail = function(req, res) {
 	}
 };
 
-// Display user create form on GET.
+// vis bruger GET.
 exports.user_create_get = function(req, res) {
     res.sendFile(path.join(__dirname + '/../view/register.html'));
 };
 
-// Handle user create on POST.
+// håndterer registrering af bruger POST.
 exports.user_create_post = function(req, res) {
     var email = req.body.email;
 	var password = req.body.password;
@@ -46,6 +46,7 @@ exports.user_create_post = function(req, res) {
 	var interest = req.body.interest;
 	var gender = req.body.gender;
 
+	//login kontrolleres ved if else statement
 	if (email && password) {
 		var sql = "INSERT INTO users (name, gender, interest, email, password) VALUES (?, ?, ?, ?, ?)";
 		con.query(sql, [name, gender, interest, email, password], function (err, result) {
@@ -63,7 +64,7 @@ exports.user_create_post = function(req, res) {
 	}
 };
 
-// Display user delete form on GET.
+// slet bruger GET.
 exports.user_delete_get = function(req, res) {
 
 	if(request.session.loggedin == true) {
@@ -74,17 +75,17 @@ exports.user_delete_get = function(req, res) {
     res.send('NOT IMPLEMENTED: user delete GET');
 };
 
-// Handle user delete on POST.
+// Håndterer slet bruger POST.
 exports.user_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: user delete POST');
 };
 
-// Display user update form on GET.
+// update bruger GET.
 exports.user_update_get = function(req, res) {
     res.send('NOT IMPLEMENTED: user update GET');
 };
 
-// Handle user update on POST.
+// håndterer update POST.
 exports.user_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: user update POST');
 };
