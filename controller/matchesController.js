@@ -1,14 +1,15 @@
 //var User = require('../models/user');
 var path = require('path');
 var config = require('../databaseconfig.js');
-var con = config.connection;
+var con = config.connection; //database
 
 // vis alle brugere
 exports.show_possible_match = function(req, res) {
    if(req.session.loggedin == true && req.session.email) {
 
    		function fetchID(callback) {
-	   		con.query('SELECT * FROM users WHERE email = ?', [req.session.email], function(error, results, fields) {
+			   con.query('SELECT * FROM users WHERE email = ?', 
+			   		[req.session.email], function(error, results, fields) {
 				if (results.length > 0) {
 					var user = results[0];
 					return callback(user);
@@ -53,7 +54,8 @@ exports.make_skip_match = function(req, res) {
 		var current_user = null;
 
 		function fetchID(callback) {
-		   	con.query('SELECT * FROM users WHERE email = ?', [req.session.email], function(error, results, fields) {
+			   con.query('SELECT * FROM users WHERE email = ?', 
+			   [req.session.email], function(error, results, fields) {
 				if (results.length > 0) {
 					var current_user = results[0];
 					return callback(current_user);
@@ -72,7 +74,8 @@ exports.make_skip_match = function(req, res) {
 
 					//kontroller om der er match
 					   		function checkMatch(callback) { 
-					   			con.query('SELECT * FROM matches WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], function(error, results, fields) {
+								   con.query('SELECT * FROM matches WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], 
+								   function(error, results, fields) {
 									if (results.length > 0) {
 										var match = results[0];
 										
@@ -91,9 +94,10 @@ exports.make_skip_match = function(req, res) {
 										console.log(err);
 									});
 					   			} else {
-					   				con.query('UPDATE matches SET is_a_match = 1 WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], function(error, results, fields) {});
+									   con.query('UPDATE matches SET is_a_match = 1 WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], 
+									   function(error, results, fields) {});
 					   			}
-					   		});
+					   		}); 
 
 						res.redirect('/matches/get-more');
 	   				break;
