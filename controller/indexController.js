@@ -1,19 +1,18 @@
 //
 var path = require('path');
-
 var config = require('../databaseconfig.js');
 var con = config.connection;
 
-// Display detail page for a specific user.
+// vis detail side for login bruger
 exports.frontpage_get = function(req, res) {
-	if(req.session.loggedin == true && req.session.email) {
-		res.redirect('/user');
+	if(req.session.loggedin == true && req.session.email) { //session login
+		res.redirect('/user'); 
 	}
     res.sendFile(path.join(__dirname + '/../view/login.html'));
 };
 
 exports.login_post = function(req, res) {
-
+//login attributterne con SQL if else
     var email = req.body.email;
 	var password = req.body.password;
 
@@ -30,7 +29,7 @@ exports.login_post = function(req, res) {
 
 				res.redirect('/user');
 			} else {
-				res.send('Incorrect Username and/or Password!');
+				res.send('Incorrect Username and/or Password!'); 
 			}			
 			res.end();
 		});

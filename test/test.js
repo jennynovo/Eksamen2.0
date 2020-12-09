@@ -9,7 +9,7 @@ const should = chai.should();
 chai.use(chaiHttp)
 
 
-describe("test", ()=> { 
+describe("test", ()=> { //den tester for kode 200, altså at vi får fat i 200
     it("beskriv testen", (done)=> {
         chai
         .request("http://localhost:3000")

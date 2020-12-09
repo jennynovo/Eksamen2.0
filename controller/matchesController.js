@@ -22,12 +22,10 @@ exports.show_possible_match = function(req, res) {
    		fetchID(function(result){  
 		    last_match_id = result.last_match_check_id; 
 
-		    con.query('SELECT * FROM users WHERE interest = ? AND gender = ? AND id > ? ORDER BY id ASC', [req.session.gender, req.session.interest, last_match_id], function(error, results, fields) {
-
+			con.query('SELECT * FROM users WHERE interest = ? AND gender = ? AND id > ? ORDER BY id ASC',
+			 [req.session.gender, req.session.interest, last_match_id], function(error, results, fields) {
 				if (results.length > 0) {
-					
 					var user = results[0];
-
 					res.render(path.join(__dirname + '/../view/possibleMatch'), {
 				        user: user
 				    });
@@ -72,7 +70,7 @@ exports.make_skip_match = function(req, res) {
 	   		switch(what_to_do) {
 	   			case 'match':
 
-					//kontroller om der er match
+					//kontroller om der er match fra den anden person opimod logged in bruger
 					   		function checkMatch(callback) { 
 								   con.query('SELECT * FROM matches WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], 
 								   function(error, results, fields) {
@@ -87,6 +85,8 @@ exports.make_skip_match = function(req, res) {
 								})
 					   		}
 
+						//Hvis der allerede er et like fra den anden person mod logged in bruger, skal der blot opdateret allerede eksisterende match med is_a_match=1
+						//Hvis der ikke er et like fra den anden person mod logged in bruger, så skal der oprettes et match i DB
 					   		checkMatch(function(match) {
 					   			if(match == 'no-match') {
 					   				var sql = "INSERT INTO matches (ori_user_id, match_user_id, ori_user_name, match_user_name) VALUES (?, ?, ?, ?)";
@@ -96,6 +96,7 @@ exports.make_skip_match = function(req, res) {
 					   			} else {
 									   con.query('UPDATE matches SET is_a_match = 1 WHERE ori_user_id = ? AND match_user_id = ?', [match_id, current_user.id], 
 									   function(error, results, fields) {});
+					
 					   			}
 					   		}); 
 

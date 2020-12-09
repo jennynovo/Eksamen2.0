@@ -9,9 +9,9 @@ exports.user_list_possible_matches = function(req, res) {
     res.send('NOT IMPLEMENTED: user possible matches list');
 };
 
-// vis side for bruger
+// login function, if true=log else=end
 exports.user_detail = function(req, res) {
-
+	
 	if(req.session.loggedin == true && req.session.email) {
 		con.query('SELECT * FROM users WHERE email = ?', [req.session.email], function(error, results, fields) {
 			if (results.length > 0) {
@@ -38,8 +38,10 @@ exports.user_create_get = function(req, res) {
     res.sendFile(path.join(__dirname + '/../view/register.html'));
 };
 
-// håndterer registrering af bruger POST.
+// håndterer registrering af bruger POST. 
+//routes/register
 exports.user_create_post = function(req, res) {
+
     var email = req.body.email;
 	var password = req.body.password;
 	var name = req.body.name;
@@ -47,15 +49,17 @@ exports.user_create_post = function(req, res) {
 	var gender = req.body.gender;
 
 	//login kontrolleres ved if else statement
+	//oprettes i SQL, tjekker for key(unik) email
+	//email er unikt så hvis emailen allerede findes i databasen vil den throw err, hvis ikke vil den succesful logge dig ind
 	if (email && password) {
 		var sql = "INSERT INTO users (name, gender, interest, email, password) VALUES (?, ?, ?, ?, ?)";
 		con.query(sql, [name, gender, interest, email, password], function (err, result) {
 			if (err) {
-				throw err;
+				throw err; //hvis email eksister vil den throw error
 			} else {
-				req.session.loggedin = true;
-				req.session.email = email;
-				res.redirect('/user');
+				req.session.loggedin = true; //loggin lykkes
+				req.session.email = email; //email ok
+				res.redirect('/user'); //du kommer efterfølgende ind på profile.ejs
 			} 
 		});
 	} else {
