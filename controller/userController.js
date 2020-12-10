@@ -8,7 +8,7 @@ var con = config.connection;
 exports.user_list_possible_matches = function(req, res) {
     res.send('NOT IMPLEMENTED: user possible matches list');
 };
-
+//KRAVSPECIFIKATION 2
 // login function, if true=log else=end
 exports.user_detail = function(req, res) {
 	
@@ -18,15 +18,15 @@ exports.user_detail = function(req, res) {
 
 				var user = results[0];
 
-				req.session.interest = user.interest;
-				req.session.gender = user.gender;
+				req.session.interest = user.interest; //display på profile
+				req.session.gender = user.gender; //display på profile
 
 				res.render(path.join(__dirname + '/../view/profile.ejs'), {
 			        user: user
-			    });
+			    }); //succesfull
 
 			} else {
-				res.send('Incorrect Username and/or Password!');
+				res.send('Incorrect Username and/or Password!'); //not succesfull
 			}			
 			res.end();
 		});
@@ -37,11 +37,11 @@ exports.user_detail = function(req, res) {
 exports.user_create_get = function(req, res) {
     res.sendFile(path.join(__dirname + '/../view/register.html'));
 };
-
+//KRAVSPECIFIKATION 1
 // håndterer registrering af bruger POST. 
 //routes/register
 exports.user_create_post = function(req, res) {
-
+//attributterne 
     var email = req.body.email;
 	var password = req.body.password;
 	var name = req.body.name;
@@ -69,6 +69,7 @@ exports.user_create_post = function(req, res) {
 };
 
 // slet bruger GET.
+//KRAVSPECIFIKATION 3
 exports.user_delete_get = function(req, res) {
 
 	if(request.session.loggedin == true) {
@@ -78,7 +79,8 @@ exports.user_delete_get = function(req, res) {
 	
     res.send('NOT IMPLEMENTED: user delete GET');
 };
-
+//kravsp3 + 4
+//IKKE IMPLEMENTERET 
 // Håndterer slet bruger POST.
 exports.user_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: user delete POST');

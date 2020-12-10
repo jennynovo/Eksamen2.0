@@ -3,9 +3,10 @@ var path = require('path');
 var config = require('../databaseconfig.js');
 var con = config.connection; //database
 
+//KRAVSPECIFIKATION 10
 // vis alle brugere
 exports.show_possible_match = function(req, res) {
-   if(req.session.loggedin == true && req.session.email) {
+   if(req.session.loggedin == true && req.session.email) { //session unik email
 
    		function fetchID(callback) {
 			   con.query('SELECT * FROM users WHERE email = ?', 
@@ -18,7 +19,7 @@ exports.show_possible_match = function(req, res) {
 		   }
 		
    		var last_match_id = 0; 
-
+//fecth viser de brugere der er mulighed for at like, hvis ikke der er nogle eller flere så kommer else
    		fetchID(function(result){  
 		    last_match_id = result.last_match_check_id; 
 
@@ -40,7 +41,7 @@ exports.show_possible_match = function(req, res) {
 };
 
 
-
+//KRAVSPECIFIKATION 6
 //dislike
 exports.make_skip_match = function(req, res) {
    if(req.session.loggedin == true && req.session.email) {

@@ -38,7 +38,7 @@ exports.login_post = function(req, res) {
 		response.end();
 	}
 };
-
+//
 exports.logout = function(req, res) {
 
     var email = req.session.email;
